@@ -41,11 +41,17 @@ public abstract class GenericService<T> {
 		Class<? extends GenericService<?>> serviceProviderClass,
 		ServletContext context
 	) throws ReflectiveOperationException {
-		String serviceProvider = context.getInitParameter(serviceProviderClass.getName() + ".serviceProvider");
+		String serviceProviderName = context.getInitParameter(serviceProviderClass.getSimpleName() + ".serviceProvider");
 		@SuppressWarnings("unchecked")
-		Class<T> clazz = (Class<T>) Class.forName(serviceProvider);
-		Constructor<T> c = clazz.getConstructor(ServletContext.class);
-		return c.newInstance(context);
+		Class<T> clazz = (Class<T>) Class.forName(serviceProviderName);
+		Constructor<T> c = clazz.getConstructor(
+			ServletContext.class,
+			String.class
+		);
+		return c.newInstance(
+			context, 
+			serviceProviderClass.getSimpleName()
+		);
 	}
 
 }
