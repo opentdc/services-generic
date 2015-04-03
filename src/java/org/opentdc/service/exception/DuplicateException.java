@@ -32,7 +32,7 @@ public class DuplicateException extends WebApplicationException {
 	// version number for serializable class
 	// (see java.io.Serializable and uids.txt)
 	private static final long serialVersionUID = 4518202010102L;
-	protected Logger logger = Logger.getLogger(this.getClass().getName());
+	private static final Logger logger = Logger.getLogger(DuplicateException.class.getName());
 
 	public DuplicateException(Status status, String message) {
 		// TODO: CXF3/Jax-RS2: super(message, status);

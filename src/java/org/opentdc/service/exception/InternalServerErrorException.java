@@ -32,7 +32,7 @@ public class InternalServerErrorException  extends WebApplicationException {
 	// version number for serializable class
 	// (see java.io.Serializable and uids.txt)
 	private static final long serialVersionUID = 4518202010105L;
-	protected Logger logger = Logger.getLogger(this.getClass().getName());
+	private static final Logger logger = Logger.getLogger(InternalServerErrorException.class.getName());
 
 	public InternalServerErrorException(Status status, String message) {
 		// TODO: CXF3/Jax-RS2: super(message, status);

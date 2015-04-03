@@ -29,7 +29,7 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response.Status;
 
 public class ValidationException extends WebApplicationException {
-	protected Logger logger = Logger.getLogger(this.getClass().getName());
+	private static final Logger logger = Logger.getLogger(ValidationException.class.getName());
 	
 	// version number for serializable class
 	// (see java.io.Serializable and uids.txt)
