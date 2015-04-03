@@ -29,6 +29,18 @@ import javax.servlet.ServletContext;
 
 public abstract class GenericService<T> {
 	
+	// query: a semicolon-separated list of query verbs. e.g. modifiedAt();lessThan(3);orderByFirstName();ascending()
+	protected static final String DEFAULT_QUERY = "";
+	// queryType: specifies the type of objects to be returned
+	// TODO: how to make queryTypes generic, i.e. independent of serviceProviders ?
+	protected static final String DEFAULT_QUERY_TYPE = "";
+	// position: the result set starts from the given position. 
+	// Increasing the position by a batch size allows to iterate the result set.
+	// hasMore=false indicates that there are no more objects to be returned
+	protected static final String DEFAULT_POSITION = "0";
+	// size: specifies the batch size, i.e. the amount of records returned starting from position.
+	protected static final String DEFAULT_SIZE = "25";
+	
 	/**
 	 * Return service provider implementation configured on context.
 	 * 
