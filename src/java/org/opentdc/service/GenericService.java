@@ -37,8 +37,10 @@ public abstract class GenericService<T> {
 	// position: the result set starts from the given position. 
 	// Increasing the position by a batch size allows to iterate the result set.
 	// hasMore=false indicates that there are no more objects to be returned
+	protected static final int DEF_POSITION = 0;
 	protected static final String DEFAULT_POSITION = "0";
 	// size: specifies the batch size, i.e. the amount of records returned starting from position.
+	public static final int DEF_SIZE = 25;
 	protected static final String DEFAULT_SIZE = "25";
 	
 	/**
