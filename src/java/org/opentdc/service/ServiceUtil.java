@@ -44,6 +44,7 @@ public abstract class ServiceUtil {
 	public static final String USERS_API_URL = "/api/users";
 	public static final String WORKRECORDS_API_URL = "/api/workrecord";
 	public static final String WTT_API_URL = "/api/company";
+	public static final String EVENTS_API_URL = "/api/event";
 	
 	/**
 	 * Creates a base URL for calling the opentdc services.
