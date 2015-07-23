@@ -40,7 +40,7 @@ import org.opentdc.util.LanguageCode;
 @XmlRootElement
 public class LocalizedTextModel {
 	private String id;				// sortable, server sets the id to the same value as langCode
-	private LanguageCode langCode; 	// unique, ISO 639-1 code
+	private LanguageCode languageCode; 	// unique, ISO 639-1 code
 	private String text;			// mandatory
 	private Date createdAt;
 	private String createdBy;
@@ -51,8 +51,8 @@ public class LocalizedTextModel {
 	public LocalizedTextModel() {
 	}
 
-	public LocalizedTextModel(LanguageCode langCode, String text) {
-		this.langCode = langCode;
+	public LocalizedTextModel(LanguageCode languageCode, String text) {
+		this.languageCode = languageCode;
 		this.text = text;
 	}
 
@@ -91,20 +91,20 @@ public class LocalizedTextModel {
 	
 	/**
 	 * Retrieving the language code according to ISO 639-1 (2 chars).
-	 * @return the langCode
+	 * @return the languageCode
 	 */
-	public LanguageCode getLangCode() {
-		return langCode;
+	public LanguageCode getLanguageCode() {
+		return languageCode;
 	}
 
 	/**
 	 * Setting the language code according to ISO 639-1 (2 chars).
 	 * @see https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
 	 * @see http://www.loc.gov/standards/iso639-2/
-	 * @param langCode the langCode to set
+	 * @param languageCode the languageCode to set
 	 */
-	public void setLangCode(LanguageCode langCode) {
-		this.langCode = langCode;
+	public void setLanguageCode(LanguageCode languageCode) {
+		this.languageCode = languageCode;
 	}
 	
 	public Date getCreatedAt() {
