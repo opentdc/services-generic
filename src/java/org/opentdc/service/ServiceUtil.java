@@ -45,6 +45,7 @@ public abstract class ServiceUtil {
 	public static final String WORKRECORDS_API_URL = "/api/workrecord";
 	public static final String WTT_API_URL = "/api/company";
 	public static final String EVENTS_API_URL = "/api/event";
+	public static final String INVITATIONS_API_URL = "/api/invitation";
 	public static final String TEXTS_API_URL = "/api/text";
 	public static final String GIFTS_API_URL = "/api/gift";
 	
