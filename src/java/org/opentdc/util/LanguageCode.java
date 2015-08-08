@@ -26,6 +26,8 @@ package org.opentdc.util;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.opentdc.service.exception.ValidationException;
+
 /**
  * The language code according to ISO 639-1 (2 chars).
  * Only a commonly used sub-selection of languages is supported.
@@ -94,5 +96,32 @@ public enum LanguageCode {
 	 */
 	public static LanguageCode getDefaultLanguageCode() {
 		return EN;
+	}
+	
+	/**
+	 * Return the languagecode that is requested by a http query url
+	 * @param query the query
+	 * @return the language code
+	 * @throws ValidationException if the query contains a wrong language code or if it is wrongly formatted
+	 */
+	public static LanguageCode getLanguageCodeFromQuery(String query) {
+		LanguageCode _lc = null;
+		int _index = query.toLowerCase().indexOf("lang");
+		if (_index >= 0) {
+			if (query.length() >= (_index + 7)) {
+				String _lang = query.substring(_index + 5, _index + 7);
+				try {
+					_lc = LanguageCode.valueOf(_lang);
+				}
+				catch(java.lang.IllegalArgumentException _ex) {
+					throw new ValidationException("query contains wrong language code: <" + _lc + ">.");
+				}
+			}
+			else {
+				throw new ValidationException("query is wrongly formatted");
+			}
+		}
+		// else  no lang query defined
+		return _lc;
 	}
 }
