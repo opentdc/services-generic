@@ -36,18 +36,40 @@ import org.apache.cxf.jaxrs.client.WebClient;
  *
  */
 public abstract class ServiceUtil {
+	// URL path element names
+	public static final String ADDRESSBOOK_PATH_EL = "addressbooks";
+	public static final String CONTACT_PATH_EL = "contact";
+	public static final String ORG_PATH_EL = "org";
+	public static final String ADDRESS_PATH_EL = "address";
+	public static final String EVENT_PATH_EL = "event";
+	public static final String GIFT_PATH_EL = "gift";
+	public static final String INVITATION_PATH_EL = "invitation";
+	public static final String RATE_PATH_EL = "rate";
+	public static final String RESOURCE_PATH_EL = "resource";
+	public static final String RATEREF_PATH_EL = "rateref";
+	public static final String TAG_PATH_EL = "tag";
+	public static final String LANG_PATH_EL = "lang";
+	public static final String TEXT_PATH_EL = "text";
+	public static final String USER_PATH_EL = "users";
+	public static final String WORKRECORD_PATH_EL = "workrecord";
+	public static final String TAGREF_PATH_EL = "tagref";
+	public static final String COMPANY_PATH_EL = "company";
+	public static final String PROJECT_PATH_EL = "project";
+	public static final String RESREF_PATH_EL = "resource";
+	
+	// service API URLs
 	public static final String DEFAULT_BASE_URL = "http://localhost:8080/opentdc-services-test/";
-	public static final String ADDRESSBOOKS_API_URL = "/api/addressbooks";
-	public static final String RATES_API_URL = "/api/rate";
-	public static final String RESOURCES_API_URL = "/api/resource";
-	public static final String TAGS_API_URL = "/api/tag";
-	public static final String USERS_API_URL = "/api/users";
-	public static final String WORKRECORDS_API_URL = "/api/workrecord";
-	public static final String WTT_API_URL = "/api/company";
-	public static final String EVENTS_API_URL = "/api/event";
-	public static final String INVITATIONS_API_URL = "/api/invitation";
-	public static final String TEXTS_API_URL = "/api/text";
-	public static final String GIFTS_API_URL = "/api/gift";
+	public static final String ADDRESSBOOKS_API_URL = "/api/" + ADDRESSBOOK_PATH_EL;
+	public static final String RATES_API_URL = "/api/" + RATE_PATH_EL;
+	public static final String RESOURCES_API_URL = "/api/" + RESOURCE_PATH_EL;
+	public static final String TAGS_API_URL = "/api/" + TAG_PATH_EL;
+	public static final String USERS_API_URL = "/api/" + USER_PATH_EL;
+	public static final String WORKRECORDS_API_URL = "/api/" + WORKRECORD_PATH_EL;
+	public static final String WTT_API_URL = "/api/" + COMPANY_PATH_EL;
+	public static final String EVENTS_API_URL = "/api/" + EVENT_PATH_EL;
+	public static final String INVITATIONS_API_URL = "/api/" + INVITATION_PATH_EL;
+	public static final String TEXTS_API_URL = "/api/" + TEXT_PATH_EL;
+	public static final String GIFTS_API_URL = "/api/" + GIFT_PATH_EL;	
 	
 	/**
 	 * Creates a base URL for calling the opentdc services.
