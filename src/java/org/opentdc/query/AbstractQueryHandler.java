@@ -23,15 +23,13 @@
  */
 package org.opentdc.query;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
 import org.opentdc.query.QueryOperator;
 import org.opentdc.query.SortPredicate;
+import org.opentdc.service.ServiceUtil;
 import org.opentdc.service.exception.ValidationException;
 
 /**
@@ -55,18 +53,36 @@ public abstract class AbstractQueryHandler {
 			String[] expectedValues) 
 	{
 		boolean _retVal = true;
+		if (realValue == null) {
+			return false;
+		}
 		switch(operator) {
-			case EQUALTO:					_retVal = realValue.compareToIgnoreCase(expectedValues[0]) == 0; break;
-			case GREATERTHAN:				_retVal = realValue.compareToIgnoreCase(expectedValues[0]) > 0; break;
-			case GREATERTHANOREQUALTO:		_retVal = realValue.compareToIgnoreCase(expectedValues[0]) >= 0; break;
-			case LESSTHAN:					_retVal = realValue.compareToIgnoreCase(expectedValues[0]) < 0; break;
-			case LESSTHANOREQUALTO:			_retVal = realValue.compareToIgnoreCase(expectedValues[0]) <= 0; break;
-			case NOTEQUALTO:				_retVal = realValue.compareToIgnoreCase(expectedValues[0]) != 0; break;
-			case ISLIKE:					_retVal = realValue.toLowerCase().contains(expectedValues[0].toLowerCase()); break;
+			case EQUALTO:					
+				_retVal = realValue.compareToIgnoreCase(expectedValues[0]) == 0; 
+				break;
+			case GREATERTHAN:				
+				_retVal = realValue.compareToIgnoreCase(expectedValues[0]) > 0; 
+				break;
+			case GREATERTHANOREQUALTO:		
+				_retVal = realValue.compareToIgnoreCase(expectedValues[0]) >= 0; 
+				break;
+			case LESSTHAN:					
+				_retVal = realValue.compareToIgnoreCase(expectedValues[0]) < 0; 
+				break;
+			case LESSTHANOREQUALTO:			
+				_retVal = realValue.compareToIgnoreCase(expectedValues[0]) <= 0; 
+				break;
+			case NOTEQUALTO:				
+				_retVal = realValue.compareToIgnoreCase(expectedValues[0]) != 0; 
+				break;
+			case ISLIKE:	
+				_retVal = realValue.toLowerCase().contains(expectedValues[0].toLowerCase()); 
+				break;
 			case NONE:	
 			default:						_retVal = true; break;
 		}
-		logger.info("evaluateStringOperation(" + realValue + ", " + operator + ", " + expectedValues[0]);
+		logger.info("evaluateStringOperation(<" + realValue + ">.<" + 
+				operator + ">=<" + expectedValues[0] + ">) -> " + _retVal);
 		return _retVal;
 	}
 	
@@ -82,8 +98,11 @@ public abstract class AbstractQueryHandler {
 			String[] expectedValues) 
 			throws ValidationException
 	{
-		Date _expectedDate = genDateFromYYYYMMDD(expectedValues[0]);
+		Date _expectedDate = ServiceUtil.parseDate(expectedValues[0], "yyyyMMdd");
 		boolean _retVal = true;
+		if (realValue == null) {
+			return false;
+		}
 		switch(operator) {
 			case EQUALTO:					_retVal = realValue.compareTo(_expectedDate) == 0; break;
 			case GREATERTHAN:				_retVal = realValue.compareTo(_expectedDate) > 0; break;
@@ -95,27 +114,8 @@ public abstract class AbstractQueryHandler {
 			case NONE:
 			default:						break;
 		}
-		logger.info("evaluateDateOperation(" + realValue + ", " + operator + ", " + _expectedDate + ") -> " + _retVal);
+		logger.info("evaluateDateOperation(>" + realValue + ">.<" + operator + ">=<" + _expectedDate + ">) -> " + _retVal);
 		return _retVal;
-	}
-	
-	/**
-	 * Converts a string in format yyyyMMdd into a Date
-	 * @param dateStr stringified date in format yyyyMMdd
-	 */
-	public static Date genDateFromYYYYMMDD(
-			String dateStr) 
-			throws ValidationException
-	{
-		DateFormat _formatter = new SimpleDateFormat("yyyyMMdd");
-		Date _date;
-		try {
-			_date = _formatter.parse(dateStr);
-		} catch (ParseException _ex) {
-			_ex.printStackTrace();
-			throw new ValidationException("query contains incorrect date format <" + dateStr + ">; must be YYYYMMDD");
-		}
-		return _date;
 	}
 	
 	/**

@@ -23,12 +23,18 @@
  */
 package org.opentdc.service;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.ws.rs.core.MediaType;
 
 import org.apache.cxf.binding.BindingFactoryManager;
 import org.apache.cxf.jaxrs.JAXRSBindingFactory;
 import org.apache.cxf.jaxrs.client.JAXRSClientFactoryBean;
 import org.apache.cxf.jaxrs.client.WebClient;
+import org.opentdc.service.exception.ValidationException;
 
 /**
  * Utility methods for calling opentdc services.
@@ -111,4 +117,27 @@ public abstract class ServiceUtil {
 		_webclient.type(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON);
 		return _webclient;
 	}
+	
+	/**
+	 * Parses a stringified date in format yyyyMMdd into a Date
+	 * @param dateStr stringified date
+	 * @param dateFormat the format of the String (e.g. yyyyMMdd)
+	 */
+	public static Date parseDate(
+			String dateStr,
+			String dateFormat) 
+			throws ValidationException
+	{
+		DateFormat _formatter = new SimpleDateFormat(dateFormat);
+		Date _date;
+		try {
+			_date = _formatter.parse(dateStr);
+		} catch (ParseException _ex) {
+			_ex.printStackTrace();
+			throw new ValidationException("query contains incorrect date format <" + dateStr + ">; must be " + dateFormat);
+		}
+		return _date;
+	}
+	
+
 }
