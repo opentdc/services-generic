@@ -23,11 +23,13 @@
  */
 package org.opentdc.service;
 
+import java.security.Principal;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.MediaType;
 
 import org.apache.cxf.binding.BindingFactoryManager;
@@ -139,5 +141,17 @@ public abstract class ServiceUtil {
 		return _date;
 	}
 	
-
+	/**
+	 * Retrieves the princial name from the servlet request.
+	 * @param request the servlet request
+	 * @return the principal name
+	 */
+	public static String getPrincipal(HttpServletRequest request) {
+		Principal _principal = request.getUserPrincipal();
+		if (_principal == null) {
+			return "undefined";
+		} else {
+			return _principal.getName();
+		}
+	}
 }
